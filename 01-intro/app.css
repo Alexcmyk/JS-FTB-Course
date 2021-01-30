@@ -1,0 +1,14 @@
+body {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
+
+h1 {
+  font-size: 22px;
+  font-family: "Helvetica Neue";
+  font-weight: 300;
+  color: rgb(124, 124, 124);
+}
