@@ -34,3 +34,25 @@ list.removeChild(lis[3]);
 console.log(lis);
 
 // Classes and Attributes
+const firstLi = document.querySelector("li:first-child");
+
+const link = firstLi.children[0]; // grabbing the a tag inside the first list item we selected above
+
+// Classes
+let val; //initialize val to show lots of things
+val = link.className; //Text of the class names attached to the "link" i.e string of the classes
+val = link.classList; // Returns a DOM token list??
+val = link.classList[0]; //returns first class
+link.classList.add("test");
+link.classList.remove("test");
+val = link;
+
+// Attributes
+val = link.getAttribute("href"); // #
+val = link.setAttribute("href", "http://www.google.com"); // Changes the link href to google
+link.setAttribute("title", "google"); //add title attribute to link with the title of google
+val = link.hasAttribute("title"); // Returns true or false is the value is there
+link.removeAttribute("title"); // Removes the title attribute
+val = link;
+
+console.log(val);
