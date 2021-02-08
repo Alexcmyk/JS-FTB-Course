@@ -13,13 +13,13 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
-    <style>
-      #loading,
-      #results {
-        display: none;
-      }
-    </style>
   </head>
+  <style>
+    #loading,
+    #results {
+      display: none;
+    }
+  </style>
   <body class="bg-dark">
     <div class="container">
       <div class="row">
@@ -28,21 +28,24 @@
             <h1 class="heading display-5 pb-3">Loan Calculator</h1>
             <form id="loan-form">
               <div class="form-group">
+                <!-- Loan amount group -->
                 <div class="input-group">
                   <span class="input-group-addon">$</span>
                   <input type="number" class="form-control" id="amount" placeholder="Loan Amount" />
                 </div>
               </div>
+              <!-- Interest Group -->
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">%</span>
                   <input type="number" class="form-control" id="interest" placeholder="Interest" />
                 </div>
               </div>
+              <!-- Years Group -->
               <div class="form-group">
                 <input type="number" class="form-control" id="years" placeholder="Years To Repay" />
               </div>
-              <div class="forn-group">
+              <div class="form-group">
                 <input type="submit" value="Calculate" class="btn btn-dark btn-block" />
               </div>
             </form>
