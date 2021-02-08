@@ -25,9 +25,9 @@ function calculateResults() {
   const totalInteresEL = document.getElementById("total-interest");
 
   // Loan Calculations
-  const principle = parseFloat(amount.value); // Turns amount value into a floating number
-  const calculatedInterest = parseFloat(interest.value) / 100 / 12; // Provided calculated interest
-  const calculatedPayments = parseFloat(years.value) * 12;
+  const principle = parseFloat(amountEL.value); // Turns amount value into a floating number
+  const calculatedInterest = parseFloat(interestEL.value) / 100 / 12; // Provided calculated interest
+  const calculatedPayments = parseFloat(yearsEL.value) * 12;
 
   // Compute Monthly Payments
   const x = Math.pow(1 + calculatedInterest, calculatedPayments);
