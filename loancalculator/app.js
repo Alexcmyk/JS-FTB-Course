@@ -1,8 +1,17 @@
 // Submit Listener
-document.getElementById("loan-form").addEventListener("submit", calculateResults);
+document.getElementById("loan-form").addEventListener("submit", function (e) {
+  // Adds function to delay the results for the spinner
+  // Hide Results
+  document.getElementById("results").style.display = "none";
+  // Show results
+  document.getElementById("loading").style.display = "block";
+
+  setTimeout(calculateResults, 2000);
+  e.preventDefault();
+});
 
 // Calculate Results
-function calculateResults(e) {
+function calculateResults() {
   console.log("calculating...");
 
   // UI variables (Inputs) | Adding EL signifes that the item grabbed is an element
@@ -28,15 +37,25 @@ function calculateResults(e) {
     monthlyPaymentEL.value = monthly.toFixed(2); // Updating the value of the monthly payment element to monthly with a fixed dec of 2
     totalPaymentEL.value = (monthly * calculatedPayments).toFixed(2);
     totalInteresEL.value = (monthly * calculatedPayments - principle).toFixed(2);
+
+    // Show results
+    document.getElementById("results").style.display = "block";
+
+    // Hide Spinner
+    document.getElementById("loading").style.display = "none";
   } else {
     showError("Please check your numbers");
   }
-
-  e.preventDefault();
 }
 
 // Error function
 function showError(error) {
+  // Hide results
+  document.getElementById("results").style.display = "none";
+
+  // Hide Spinner
+  document.getElementById("loading").style.display = "none";
+
   // create div
   const errorDiv = document.createElement("div");
 
