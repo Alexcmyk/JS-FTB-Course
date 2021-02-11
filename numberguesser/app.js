@@ -7,93 +7,92 @@ GAME FUNCTION:
 - Let player choose to play again
 */
 
-// Game values
+// Game values | Establish multiple values by puttin a comma in between
 let min = 1,
-    max = 10,
-    winningNum = getRandomNum(min, max),
-    guessesLeft = 3;
+  max = 10,
+  winningNum = getRandomNum(min, max),
+  guessesLeft = 3;
 
 // UI Elements
-const game = document.querySelector('#game'),
-      minNum = document.querySelector('.min-num'),
-      maxNum = document.querySelector('.max-num'),
-      guessBtn = document.querySelector('#guess-btn'),
-      guessInput = document.querySelector('#guess-input'),
-      message = document.querySelector('.message');
+const gameUI = document.querySelector("#game"),
+  minNumUI = document.querySelector(".min-num"),
+  maxNumUI = document.querySelector(".max-num"),
+  guessBtnUI = document.querySelector("#guess-btn"),
+  guessInputUI = document.querySelector("#guess-input"),
+  messageUI = document.querySelector(".message");
 
 // Assign UI min and max
-minNum.textContent = min;
-maxNum.textContent = max;
 
-// Play again event listener
-game.addEventListener('mousedown', function(e){
-  if(e.target.className === 'play-again'){
-    window.location.reload();
+minNumUI.textContent = min;
+maxNumUI.textContent = max;
+
+// Play Again listener
+gameUI.addEventListener("mousedown", function (e) {
+  // Using mousedown stops the page from reloading to fast.
+  // Had to add even listener to a parent, bc of event delegation. Checking to see if the event target is on the class "play-again"
+  if (e.target.className === "play-again") {
+    window.location.reload(); // Reloading the page
   }
 });
-      
+
 // Listen for guess
-guessBtn.addEventListener('click', function(){
-  let guess = parseInt(guessInput.value);
-  
-  // Validate
-  if(isNaN(guess) || guess < min || guess > max){
-    setMessage(`Please enter a number between ${min} and ${max}`, 'red');
-  }
 
-  // Check if won
-  if(guess === winningNum){
-    // Game over - won
-    gameOver(true, `${winningNum} is correct, YOU WIN!`);
+guessBtnUI.addEventListener("click", function () {
+  let guess = parseInt(guessInputUI.value);
 
+  // Validate Input so its not blank, less than the min or higher than the max
+  if (isNaN(guess) || guess < min || guess > max) {
+    //isNaN that checks to see if the item passed in is a NaN.
+    setMessage(`Please enter a number between ${min} and ${max}`, "red");
+    guessInputUI.value = "";
+  } else if (guess === winningNum) {
+    // Check if won ^
+    gameOver(true, `${winningNum} is the correct number, you win!`); // setting the ternary operator to true and passing in the winning message
+  } else if (guessesLeft === 0) {
+    // check if out of guesses ^
+    gameOver(false, `Game over, you lost. The correct number was ${winningNum}`); // setting the ternary operator to false and passing in the losing message
   } else {
-    // Wrong number
+    // Game continues - answer wrong ^
+    // Change border color
+    guessInputUI.style.borderColor = "red";
+    //Clear input
+    guessInputUI.value = "";
+    // Tell user wrong number
+    setMessage(`${guess} is not correct, ${guessesLeft} guesses left`, "red");
     guessesLeft -= 1;
-
-    if(guessesLeft === 0){
-      // Game over - lost
-      gameOver(false, `Game Over, you lost. The correct number was ${winningNum}`);
-    } else {
-      // Game continues - answer wrong
-
-      // Change border color
-      guessInput.style.borderColor = 'red';
-
-      // Clear Input
-      guessInput.value = '';
-
-      // Tell user its the wrong number
-      setMessage(`${guess} is not correct, ${guessesLeft} guesses left`, 'red');
-    }
   }
 });
 
-// Game over
-function gameOver(won, msg){
-  let color;
-  won === true ? color = 'green' : color = 'red';
+// Gameover function
 
-  // Disable input
-  guessInput.disabled = true;
-  // Change border color
-  guessInput.style.borderColor = color;
-  // Set text color
-  message.style.color = color;
-  // Set message
+function gameOver(won, msg) {
+  let color;
+
+  won === true ? (color = "green") : (color = "red"); // Ternary operatir ??
+
+  //disable input
+  guessInputUI.disabled = true;
+  //Change border to green
+  guessInputUI.style.borderColor = color;
+  //set text color
+  messageUI.style.color = color;
+  //Update set message
   setMessage(msg);
 
-  // PLay Again?
-  guessBtn.value = 'Play Again';
-  guessBtn.className += 'play-again';
+  // Play again
+  guessBtnUI.value = "Play Again?"; // Changing the button text
+  guessBtnUI.className += "play-again"; // appending a class name to the button
 }
 
-// Get Winning Number
-function getRandomNum(min, max){
-  return Math.floor(Math.random()*(max-min+1)+min);
+// Get winning number function
+function getRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// Set message
-function setMessage(msg, color){
-  message.style.color = color;
-  message.textContent = msg;
+// Set message function
+
+function setMessage(msg, color) {
+  // The second item passed in is the color from above
+  messageUI.style.color = color;
+  messageUI.textContent = msg;
 }
