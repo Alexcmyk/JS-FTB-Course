@@ -35,7 +35,7 @@ const people = [
   { name: "Dan", age: 32 },
 ];
 
-// Loops through ibject and logs the people's names to the console
+// Loops through object and logs the people's names to the console
 for (let i = 0; i < people.length; i++) {
   console.log(people[i].name);
 }
